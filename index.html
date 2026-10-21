@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AnimeAdda — anime action figures, collectibles, premium figures and pre-bookings.">
+<meta name="theme-color" content="#090914">
+<title>AnimeAdda | Anime Figures & Collectibles</title>
+<style>
+:root{--bg:#090914;--panel:#121225;--panel2:#191930;--text:#f7f4ff;--muted:#aaa8c3;--purple:#a855f7;--cyan:#4deaff;--pink:#ff4fc8;--line:rgba(255,255,255,.11)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#241044 0,transparent 38%),radial-gradient(ellipse at 95% 20%,#092b43 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(9,9,20,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.4px;font-size:1.35rem}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 0 24px #a855f755;font-size:1.35rem}.brand span:last-child{color:#d9b6ff}.links{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:.94rem}.links a:hover{color:white}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:12px 17px;border-radius:12px;background:linear-gradient(135deg,var(--purple),#7537ef);color:white;font-weight:800;border:1px solid #ffffff20;cursor:pointer;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}.btn.secondary{background:#ffffff0b;border:1px solid var(--line)}
+.hero{padding:74px 0 60px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:480px}.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #a855f766;background:#a855f718;color:#e4caff;padding:8px 12px;border-radius:999px;font-size:.82rem;font-weight:800;letter-spacing:.5px}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}h1{font-size:clamp(2.7rem,6vw,5.1rem);line-height:.99;letter-spacing:-3px;margin:22px 0}.gradient{background:linear-gradient(100deg,#fff 8%,#d5aaff 48%,#4deaff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:1.08rem;line-height:1.7;color:var(--muted);max-width:580px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.hero-art{position:relative;min-height:340px;border-radius:28px;border:1px solid #ffffff1c;background:linear-gradient(145deg,#21153c,#0e2435 70%,#101024);overflow:hidden;display:grid;place-items:center;box-shadow:0 25px 90px #0008}.hero-art:before,.hero-art:after{content:"";position:absolute;border-radius:50%;filter:blur(1px)}.hero-art:before{width:240px;height:240px;background:#a855f72c;top:-70px;right:-30px}.hero-art:after{width:200px;height:200px;background:#4deaff20;bottom:-70px;left:-20px}.art-inner{position:relative;z-index:1;text-align:center;padding:28px}.art-emoji{font-size:clamp(6rem,14vw,10rem);filter:drop-shadow(0 15px 18px #0009);line-height:1.1}.art-label{margin-top:18px;font-weight:900;font-size:1.3rem;letter-spacing:2px}.art-sub{color:#bcb8d6;font-size:.8rem;letter-spacing:3px;margin-top:7px}.floating{position:absolute;z-index:2;padding:10px 13px;border-radius:12px;background:#0a0a19cc;border:1px solid var(--line);font-size:.78rem;font-weight:800}.float1{left:18px;top:25px}.float2{right:18px;bottom:24px;color:var(--cyan)}
+.strip{border-block:1px solid var(--line);background:#ffffff04}.strip-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:18px 0;color:#d8d4eb;font-size:.88rem}.strip span{display:flex;gap:9px;align-items:center}.strip b{color:var(--cyan)}
+section{padding:68px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}.kicker{color:var(--cyan);font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:900}.section-head h2{font-size:clamp(1.9rem,4vw,2.8rem);letter-spacing:-1px;margin:9px 0 0}.section-head p{color:var(--muted);margin:8px 0 0;line-height:1.6}.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}.filter{padding:9px 13px;background:#ffffff08;border:1px solid var(--line);color:var(--muted);border-radius:999px;cursor:pointer}.filter.active,.filter:hover{color:white;border-color:#a855f7aa;background:#a855f722}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product{background:linear-gradient(160deg,#17172c,#0f0f1d);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.22s}.product:hover{transform:translateY(-5px);border-color:#a855f766;box-shadow:0 18px 35px #0004}.product-img{height:220px;display:grid;place-items:center;position:relative;background:radial-gradient(ellipse at 50% 70%,#a855f72e,transparent 58%),linear-gradient(135deg,#17172b,#102333)}.product-img img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:5.6rem;filter:drop-shadow(0 12px 12px #0008)}.tag{position:absolute;top:13px;left:13px;padding:6px 9px;border-radius:8px;font-size:.72rem;font-weight:900;background:#a855f7;color:white}.tag.cyan{background:#087f8c}.tag.pink{background:#b02b85}.product-body{padding:17px}.category{color:var(--cyan);font-size:.72rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:900}.product h3{margin:7px 0 8px;font-size:1.08rem}.product p{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0 0 16px;min-height:40px}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.price{font-size:1.13rem;font-weight:950}.order{font-size:.82rem;padding:10px 12px}.note{color:var(--muted);font-size:.82rem;margin-top:18px;line-height:1.6}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cat{padding:22px 18px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#19172d,#10101e);transition:.2s}.cat:hover{border-color:#4deaff66;transform:translateY(-3px)}.cat .emoji{font-size:2rem}.cat h3{margin:14px 0 5px}.cat p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.5}
+.booking{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center;padding:34px;border-radius:25px;border:1px solid #a855f744;background:linear-gradient(115deg,#281343,#11172b 70%,#092630)}.booking h2{font-size:2.1rem;letter-spacing:-1px;margin:10px 0}.booking p{color:#c3bfd8;line-height:1.7}.booking-card{padding:23px;border-radius:18px;background:#090914aa;border:1px solid var(--line)}.booking-card h3{margin:0 0 8px}.booking-card p{font-size:.9rem;margin:0 0 18px}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:20px}.contact-box{padding:25px;border:1px solid var(--line);border-radius:20px;background:#ffffff05}.contact-box h3{margin-top:0}.contact-box p{color:var(--muted);line-height:1.7}.contact-links{display:flex;gap:10px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:27px 0;color:var(--muted);font-size:.85rem}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.small{font-size:.78rem;color:#8f8ba9}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:48px}.hero-art{min-height:290px}.grid{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(2,1fr)}.booking,.contact{grid-template-columns:1fr}.links{gap:12px}.links a:not(.btn){display:none}.section-head{align-items:start;flex-direction:column}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.product-img{height:250px}.nav{height:66px}.brand{font-size:1.15rem}.logo{width:37px;height:37px}.nav>.btn{padding:10px 12px;font-size:.82rem}.hero{min-height:0}.booking{padding:23px}.strip-inner{font-size:.8rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="AnimeAdda home"><span class="logo">卍</span><span>ANIMEADDA</span></a>
+    <nav class="links" aria-label="Main navigation">
+      <a href="#shop">Shop</a><a href="#categories">Anime</a><a href="#prebooking">Pre-booking</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="#shop">Explore Figures ↗</a>
+  </div>
+</header>
+<main>
+  <div class="wrap hero" id="home">
+    <div>
+      <div class="eyebrow"><i></i> YOUR ANIME COLLECTIBLE SPOT</div>
+      <h1>Bring your<br><span class="gradient">anime world</span><br>to life.</h1>
+      <p>Find your favourite characters, discover collectible action figures, and level up your shelf with AnimeAdda. New stock and pre-bookings are welcome.</p>
+      <div class="hero-actions"><a class="btn" href="#shop">Shop Figures ↓</a><a class="btn secondary" href="#contact">Contact AnimeAdda</a></div>
+    </div>
+    <div class="hero-art" aria-label="Anime collectible themed artwork">
+      <span class="floating float1">✦ COLLECT YOUR FAVOURITES</span>
+      <div class="art-inner"><div class="art-emoji">⚔️</div><div class="art-label">POWER UP YOUR COLLECTION</div><div class="art-sub">FIGURES · COLLECTIBLES · ANIME</div></div>
+      <span class="floating float2">NEW STOCK • DM TO ORDER</span>
+    </div>
+  </div>
+  <div class="strip"><div class="wrap strip-inner"><span>✦ <b>Action Figures</b> for anime fans</span><span>✦ In-stock products & pre-bookings</span><span>✦ Easy ordering by WhatsApp / Instagram</span></div></div>
+  <section id="shop">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">The collection</div><h2>Featured figures</h2><p>Swap these demo products with your real stock, photos and prices.</p></div></div>
+      <div class="filters" role="group" aria-label="Filter products">
+        <button class="filter active" data-filter="all">All figures</button><button class="filter" data-filter="stock">In stock</button><button class="filter" data-filter="prebooking">Pre-booking</button><button class="filter" data-filter="premium">Premium</button>
+      </div>
+      <div class="grid" id="productGrid">
+        <article class="product" data-status="stock" data-category="one-piece">
+          <div class="product-img"><span class="tag">IN STOCK</span><div class="placeholder">🏴‍☠️</div></div>
+          <div class="product-body"><div class="category">One Piece</div><h3>Monkey D. Luffy Figure</h3><p>Add your Luffy figure details, size and condition here.</p><div class="product-bottom"><span class="price">₹ Add price</span><a class="btn order" href="#contact" data-product="Monkey D. Luffy Figure">Order ↗</a></div></div>
+        </article>
+        <article class="product" data-status="stock" data-category="naruto">
+          <div class="product-img"><span class="tag">IN STOCK</span><div class="placeholder">🍥</div></div>
+          <div class="product-body"><div class="category">Naruto</div><h3>Naruto Uzumaki Figure</h3><p>Showcase your ninja collection with your real product photo.</p><div class="product-bottom"><span class="price">₹ Add price</span><a class="btn order" href="#contact" data-product="Naruto Uzumaki Figure">Order ↗</a></div></div>
+        </article>
+        <article class="product" data-status="prebooking" data-category="dragon-ball">
+          <div class="product-img"><span class="tag pink">PRE-BOOKING</span><div class="placeholder">🐉</div></div>
+          <div class="product-body"><div class="category">Dragon Ball</div><h3>Goku Collectible Figure</h3><p>Pre-booking item. Add expected arrival and booking terms.</p><div class="product-bottom"><span class="price">₹ Add price</span><a class="btn order" href="#contact" data-product="Goku Collectible Figure">Pre-book ↗</a></div></div>
+        </article>
+        <article class="product" data-status="premium" data-category="premium">
+          <div class="product-img"><span class="tag cyan">PREMIUM</span><div class="placeholder">👹</div></div>
+          <div class="product-body"><div class="category">Premium figures</div><h3>Premium Anime Figure</h3><p>Highlight a premium figure, scale, details and packaging.</p><div class="product-bottom"><span class="price">₹ Add price</span><a class="btn order" href="#contact" data-product="Premium Anime Figure">Enquire ↗</a></div></div>
+        </article>
+        <article class="product" data-status="stock" data-category="accessories">
+          <div class="product-img"><span class="tag">IN STOCK</span><div class="placeholder">⚔️</div></div>
+          <div class="product-body"><div class="category">Anime accessories</div><h3>Anime Katana</h3><p>Add whether it is a light-up or regular version and its price.</p><div class="product-bottom"><span class="price">₹ Add price</span><a class="btn order" href="#contact" data-product="Anime Katana">Order ↗</a></div></div>
+        </article>
+        <article class="product" data-status="prebooking" data-category="collectibles">
+          <div class="product-img"><span class="tag pink">PRE-BOOKING</span><div class="placeholder">✨</div></div>
+          <div class="product-body"><div class="category">Collectibles</div><h3>New Arrival — Coming Soon</h3><p>Use this card for a new product or upcoming release.</p><div class="product-bottom"><span class="price">Ask for price</span><a class="btn order" href="#contact" data-product="New Arrival Collectible">Enquire ↗</a></div></div>
+        </article>
+      </div>
+      <p class="note">Demo catalogue: product names, emoji artwork and “Add price” labels are placeholders, not confirmed stock or prices. Replace them before sharing the website with customers.</p>
+    </div>
+  </section>
+  <section id="categories">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">Find your fandom</div><h2>Shop by anime</h2><p>Organize the store around the series your customers love.</p></div></div>
+      <div class="categories">
+        <a class="cat" href="#shop"><div class="emoji">🏴‍☠️</div><h3>One Piece</h3><p>Luffy, Zoro and pirate crew collectibles.</p></a>
+        <a class="cat" href="#shop"><div class="emoji">🍥</div><h3>Naruto</h3><p>Ninja legends and character figures.</p></a>
+        <a class="cat" href="#shop"><div class="emoji">🐉</div><h3>Dragon Ball</h3><p>Powerful fighters and iconic moments.</p></a>
+        <a class="cat" href="#shop"><div class="emoji">✨</div><h3>More anime</h3><p>Add your other series and characters.</p></a>
+      </div>
+    </div>
+  </section>
+  <section id="prebooking">
+    <div class="wrap">
+      <div class="booking">
+        <div><div class="kicker">Reserve your favourite</div><h2>Not in stock yet?</h2><p>Ask about upcoming figures and pre-booking availability. We’ll confirm the price, estimated arrival and booking details directly before you order.</p><a class="btn" href="#contact" data-general="Hi AnimeAdda, I want to ask about pre-booking an anime figure.">Ask about pre-booking ↗</a></div>
+        <div class="booking-card"><h3>AnimeAdda pre-bookings</h3><p>✦ Upcoming collectibles<br>✦ Premium figure releases<br>✦ Availability confirmed directly<br>✦ DM to check booking details</p><span class="small">Pre-booking is subject to confirmation by AnimeAdda.</span></div>
+      </div>
+    </div>
+  </section>
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">Let's connect</div><h2>Order or ask us</h2><p>Choose your preferred way to contact AnimeAdda.</p></div></div>
+      <div class="contact">
+        <div class="contact-box"><h3>📲 Order directly</h3><p>DM us on Instagram with the product name to confirm availability, final price and delivery or pickup options. Join our WhatsApp Community for updates.</p><div class="contact-links"><a class="btn" id="communityLink" href="https://chat.whatsapp.com/KJNNX7iJyEk5iuxqvFflTC" target="_blank" rel="noopener">Join WhatsApp Community ↗</a><a class="btn secondary" href="https://www.instagram.com/animeadda_8/" target="_blank" rel="noopener">Order via Instagram DM ↗</a></div></div>
+        <div class="contact-box"><h3>📍 Visit / contact</h3><p><strong>AnimeAdda</strong><br>Instagram: @animeadda_8<br>Shop location: Alakh No Otlo, Nikol (confirm current hours before visiting).</p><p class="small">Add your official WhatsApp number and exact shop address before publishing.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap footer-inner"><div><strong>ANIMEADDA</strong> — For the love of anime.</div><div>© <span id="year"></span> AnimeAdda. All rights reserved.</div></div></footer>
+<script>
+const INSTAGRAM_URL = "https://www.instagram.com/animeadda_8/";
+const COMMUNITY_URL = "https://chat.whatsapp.com/KJNNX7iJyEk5iuxqvFflTC";
+document.querySelectorAll("[data-product]").forEach(el=>{
+  el.href = INSTAGRAM_URL;
+  el.target = "_blank";
+  el.rel = "noopener";
+  el.title = "Ask about " + el.dataset.product + " via Instagram DM.";
+});
+document.querySelectorAll("[data-general]").forEach(el=>{
+  el.href = INSTAGRAM_URL;
+  el.target = "_blank";
+  el.rel = "noopener";
+});
+document.querySelectorAll(".filter").forEach(button=>button.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));button.classList.add("active");
+  const f=button.dataset.filter;
+  document.querySelectorAll(".product").forEach(card=>{
+    card.style.display=(f==="all"||card.dataset.status===f)?"":"none";
+  });
+}));
+</script>
+</body>
+</html>

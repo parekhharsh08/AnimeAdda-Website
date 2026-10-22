@@ -2282,7 +2282,7 @@
     });
 
     // ==========================================
-    // 6. SCROLL REVEAL OBSERVER
+    // 6. SCROLL REVEAL OBSERVER WITH FALLBACK
     // ==========================================
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2292,11 +2292,23 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -40px 0px"
+      threshold: 0.05,
+      rootMargin: "0px 0px 100px 0px"
     });
 
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+      // Fallback: Check if already in viewport
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 100) {
+        el.classList.add('is-revealed');
+      }
+    });
+
+    // Final safety fallback: reveal all after 1.5s in case of slow mobile scroll
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.is-revealed)').forEach(el => el.classList.add('is-revealed'));
+    }, 1500);
   </script>
 </body>
 </html>

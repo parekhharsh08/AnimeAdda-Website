@@ -34,6 +34,7 @@
       --pink: #ff2d87;
       --pink-glow: rgba(255, 45, 135, 0.5);
       --gold: #ffb703;
+      --red: #ef4444;
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -60,7 +61,6 @@
       overflow-x: hidden;
       line-height: 1.6;
       position: relative;
-      selection-background-color: var(--purple);
     }
 
     ::selection {
@@ -133,7 +133,6 @@
       z-index: 1;
     }
 
-    /* Layout Wrapper */
     .wrap {
       width: min(1200px, 92%);
       margin: 0 auto;
@@ -141,7 +140,6 @@
       z-index: 2;
     }
 
-    /* Typography */
     h1, h2, h3, h4, .font-heading {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
@@ -153,12 +151,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
-    }
-
-    .gradient-fire {
-      background: linear-gradient(120deg, #ff9a3c 0%, #ff2d87 60%, #c026d3 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
     /* Buttons */
@@ -233,10 +225,77 @@
       box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4);
     }
 
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-danger:hover {
+      box-shadow: 0 6px 25px rgba(239, 68, 68, 0.6);
+    }
+
     .btn-sm {
       padding: 9px 18px;
       font-size: 0.85rem;
       border-radius: var(--radius-sm);
+    }
+
+    /* =========================================================
+       OWNER TOP ADMIN BAR (Visible when Owner is logged in)
+       ========================================================= */
+    #ownerTopBar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: linear-gradient(90deg, #180d36, #0e1231 50%, #200f28);
+      border-bottom: 2px solid var(--purple);
+      padding: 10px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px);
+    }
+
+    #ownerTopBar.active {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: slideDown 0.4s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+
+    .owner-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #e9d5ff;
+    }
+
+    .owner-badge {
+      background: linear-gradient(135deg, var(--gold), #f59e0b);
+      color: #000;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .owner-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     /* =========================================================
@@ -273,6 +332,7 @@
       gap: 12px;
       text-decoration: none;
       color: #fff;
+      cursor: pointer;
     }
 
     .brand-icon {
@@ -350,20 +410,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: 1px solid var(--border);
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      place-items: center;
     }
 
     /* =========================================================
@@ -548,7 +594,6 @@
       text-transform: uppercase;
     }
 
-    /* Floating Badges on Hero Card */
     .float-chip {
       position: absolute;
       z-index: 10;
@@ -751,7 +796,6 @@
       pointer-events: none;
     }
 
-    /* Product Count Counter */
     .catalog-status {
       font-size: 0.88rem;
       color: var(--text-muted);
@@ -762,7 +806,7 @@
     }
 
     /* =========================================================
-       PRODUCT CARDS WITH 3D TILT EFFECT
+       PRODUCT CARDS & OWNER CONTROLS
        ========================================================= */
     .products-grid {
       display: grid;
@@ -789,7 +833,48 @@
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(168, 85, 247, 0.25);
     }
 
-    /* Dynamic Glare Reflection */
+    /* Owner Card Action Bar (Visible when logged in) */
+    .card-owner-bar {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 20;
+      background: rgba(10, 10, 25, 0.9);
+      border: 1px solid var(--purple);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+    }
+
+    body.owner-mode-active .card-owner-bar {
+      display: flex;
+    }
+
+    .card-owner-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition);
+    }
+
+    .card-owner-btn:hover {
+      background: var(--purple);
+    }
+
+    .card-owner-btn.delete-btn:hover {
+      background: var(--red);
+    }
+
     .card-glare {
       position: absolute;
       top: 0;
@@ -832,8 +917,20 @@
       z-index: 2;
     }
 
+    .card-img-visual {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      z-index: 2;
+    }
+
     .product-card:hover .card-emoji-visual {
       transform: scale(1.15) rotate(4deg);
+    }
+
+    .product-card:hover .card-img-visual {
+      transform: scale(1.08);
     }
 
     .status-badge {
@@ -849,6 +946,18 @@
       text-transform: uppercase;
       z-index: 3;
       backdrop-filter: blur(10px);
+      cursor: default;
+    }
+
+    body.owner-mode-active .status-badge {
+      cursor: pointer;
+      box-shadow: 0 0 10px #fff4;
+      border: 1px dashed rgba(255, 255, 255, 0.4);
+    }
+
+    body.owner-mode-active .status-badge::after {
+      content: ' 🔄';
+      font-size: 0.7rem;
     }
 
     .badge-stock {
@@ -869,6 +978,12 @@
       box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
     }
 
+    .badge-gear {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
     .rating-badge {
       position: absolute;
       top: 14px;
@@ -884,6 +999,12 @@
       align-items: center;
       gap: 4px;
       z-index: 3;
+    }
+
+    body.owner-mode-active .rating-badge {
+      right: auto;
+      left: 14px;
+      top: 48px;
     }
 
     .card-info {
@@ -947,7 +1068,7 @@
     }
 
     /* =========================================================
-       ANIME FANDOM CATEGORIES
+       FANDOM CATEGORIES
        ========================================================= */
     .fandom-grid {
       display: grid;
@@ -1316,16 +1437,16 @@
     }
 
     /* =========================================================
-       INTERACTIVE ORDER MODAL
+       MODALS (ORDER MODAL & OWNER MODALS)
        ========================================================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(14px);
       display: grid;
       place-items: center;
-      z-index: 1000;
+      z-index: 10000;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -1337,7 +1458,7 @@
       pointer-events: all;
     }
 
-    .order-modal {
+    .custom-modal {
       background: linear-gradient(145deg, #17172f, #0d0d1c);
       border: 1px solid rgba(168, 85, 247, 0.4);
       border-radius: var(--radius-lg);
@@ -1347,9 +1468,11 @@
       position: relative;
       transform: scale(0.92) translateY(20px);
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .modal-backdrop.open .order-modal {
+    .modal-backdrop.open .custom-modal {
       transform: scale(1) translateY(0);
     }
 
@@ -1368,6 +1491,7 @@
       display: grid;
       place-items: center;
       transition: var(--transition);
+      z-index: 5;
     }
 
     .modal-close-btn:hover {
@@ -1417,6 +1541,132 @@
       transform: translateY(-2px);
     }
 
+    /* Owner Form Controls */
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(8, 8, 18, 0.85);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.94rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Photo Upload Dropzone */
+    .upload-zone {
+      border: 2px dashed rgba(168, 85, 247, 0.4);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(168, 85, 247, 0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--cyan);
+      background: rgba(0, 245, 255, 0.06);
+    }
+
+    .photo-preview-wrap {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-top: 10px;
+      display: none;
+      position: relative;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+
+    .photo-preview-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .clear-photo-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Toast Notifications */
+    #toastContainer {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: rgba(18, 14, 38, 0.95);
+      border: 1px solid var(--purple);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.3);
+      backdrop-filter: blur(15px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastIn 0.3s ease;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
     /* Scroll Reveal Animation Classes */
     .reveal {
       opacity: 0;
@@ -1429,9 +1679,7 @@
       transform: translateY(0);
     }
 
-    /* =========================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================= */
+    /* Responsive */
     @media (max-width: 960px) {
       .hero {
         grid-template-columns: 1fr;
@@ -1494,6 +1742,9 @@
         bottom: 16px;
         right: 16px;
       }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -1509,13 +1760,35 @@
   <!-- Interactive 60fps Star & Energy Ember Canvas -->
   <canvas id="particles-canvas"></canvas>
 
+  <!-- OWNER TOP ADMIN BAR -->
+  <div id="ownerTopBar">
+    <div class="owner-info">
+      <span class="owner-badge">👑 OWNER DASHBOARD</span>
+      <span>AnimeAdda Store Manager</span>
+    </div>
+    <div class="owner-actions">
+      <button class="btn btn-sm" id="addNewProductBtn">
+        <span>➕ Add New Figure</span>
+      </button>
+      <button class="btn btn-sm btn-wa" id="publishToGitHubBtn" title="Sync changes directly to live website">
+        <span>🚀 Publish to Live Site</span>
+      </button>
+      <button class="btn btn-sm btn-secondary" id="changePinBtn">
+        <span>⚙️ Change PIN</span>
+      </button>
+      <button class="btn btn-sm btn-danger" id="logoutOwnerBtn">
+        <span>🚪 Exit Owner Mode</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Navigation Bar -->
   <header id="navbar">
     <div class="wrap nav">
-      <a class="brand" href="#home" aria-label="AnimeAdda Home">
+      <div class="brand" id="brandLogo" title="AnimeAdda Home (Click 3x for Owner Login)">
         <div class="brand-icon">卍</div>
         <div class="brand-title">ANIME<span>ADDA</span></div>
-      </a>
+      </div>
 
       <nav class="nav-links" aria-label="Main Navigation">
         <a href="#shop">Figures</a>
@@ -1644,151 +1917,13 @@
         </div>
 
         <div class="catalog-status reveal">
-          <span id="productCounter">Showing all collectibles</span>
+          <span id="productCounter">Loading collection...</span>
           <span style="color: var(--cyan); font-weight: 600;">Tap card to order in 1-click</span>
         </div>
 
-        <!-- 3D Product Grid -->
+        <!-- 3D Dynamic Product Grid -->
         <div class="products-grid" id="productGrid">
-          
-          <!-- Product 1 -->
-          <article class="product-card tilt-card reveal" data-status="stock" data-category="one-piece" data-name="Monkey D. Luffy Gear 5 Figure" data-price="₹1,899">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-stock">IN STOCK</span>
-              <span class="rating-badge">★ 4.9</span>
-              <div class="card-emoji-visual">🏴‍☠️</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">One Piece</div>
-              <h3 class="product-title">Monkey D. Luffy — Gear 5 Sun God</h3>
-              <p class="product-desc">High-detail sculpted sun god transformation with dynamic cloud aura base and vibrant colors.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Starting at</span>
-                  <span class="price-value">₹1,899</span>
-                </div>
-                <button class="btn btn-sm open-order-btn" data-product="Monkey D. Luffy Gear 5 Figure" data-price="₹1,899">Order Now ↗</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Product 2 -->
-          <article class="product-card tilt-card reveal" data-status="stock" data-category="naruto" data-name="Naruto Uzumaki Sage Mode Figure" data-price="₹1,699">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-stock">IN STOCK</span>
-              <span class="rating-badge">★ 4.8</span>
-              <div class="card-emoji-visual">🍥</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">Naruto Shippuden</div>
-              <h3 class="product-title">Naruto Uzumaki — Sage Mode</h3>
-              <p class="product-desc">Iconic toad scroll pose featuring signature orange pigment eyes and detailed Akatsuki battle mantle.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Starting at</span>
-                  <span class="price-value">₹1,699</span>
-                </div>
-                <button class="btn btn-sm open-order-btn" data-product="Naruto Uzumaki Sage Mode Figure" data-price="₹1,699">Order Now ↗</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Product 3 -->
-          <article class="product-card tilt-card reveal" data-status="prebooking" data-category="dragon-ball" data-name="Goku Ultra Instinct Mastered Figure" data-price="₹2,499">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-prebooking">PRE-BOOKING</span>
-              <span class="rating-badge">★ 5.0</span>
-              <div class="card-emoji-visual">🐉</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">Dragon Ball Super</div>
-              <h3 class="product-title">Goku — Mastered Ultra Instinct</h3>
-              <p class="product-desc">Silver hair divine aura collectible. Limited import slots for the upcoming batch.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Estimated Price</span>
-                  <span class="price-value">₹2,499</span>
-                </div>
-                <button class="btn btn-sm btn-secondary open-order-btn" data-product="Goku Ultra Instinct Figure" data-price="₹2,499">Pre-Book ⏳</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Product 4 -->
-          <article class="product-card tilt-card reveal" data-status="premium" data-category="jujutsu-kaisen" data-name="Gojo Satoru Hollow Purple Statue" data-price="₹3,999">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-premium">PREMIUM RESIN SCALE</span>
-              <span class="rating-badge">★ 5.0</span>
-              <div class="card-emoji-visual">👁️</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">Jujutsu Kaisen</div>
-              <h3 class="product-title">Gojo Satoru — Hollow Purple</h3>
-              <p class="product-desc">Deluxe scale edition with translucent purple energy effects and custom illuminated display plinth.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Collector Price</span>
-                  <span class="price-value">₹3,999</span>
-                </div>
-                <button class="btn btn-sm open-order-btn" data-product="Gojo Satoru Hollow Purple Statue" data-price="₹3,999">Enquire 👑</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Product 5 -->
-          <article class="product-card tilt-card reveal" data-status="gear" data-category="demon-slayer" data-name="Rengoku Nichirin Flame Katana" data-price="₹1,299">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-stock">IN STOCK</span>
-              <span class="rating-badge">★ 4.9</span>
-              <div class="card-emoji-visual">⚔️</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">Demon Slayer</div>
-              <h3 class="product-title">Kyojuro Rengoku — Nichirin Sword</h3>
-              <p class="product-desc">High-precision replica metal blade with authentic flame tsuba guard, wooden saya sheath and stand.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Starting at</span>
-                  <span class="price-value">₹1,299</span>
-                </div>
-                <button class="btn btn-sm open-order-btn" data-product="Rengoku Nichirin Katana" data-price="₹1,299">Order Now ↗</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- Product 6 -->
-          <article class="product-card tilt-card reveal" data-status="stock" data-category="solo-leveling" data-name="Sung Jin-Woo Shadow Monarch Figure" data-price="₹2,199">
-            <div class="card-glare"></div>
-            <div class="card-preview">
-              <div class="card-preview-mesh"></div>
-              <span class="status-badge badge-stock">HOT RELEASE</span>
-              <span class="rating-badge">★ 5.0</span>
-              <div class="card-emoji-visual">🗡️</div>
-            </div>
-            <div class="card-info">
-              <div class="anime-tag">Solo Leveling</div>
-              <h3 class="product-title">Sung Jin-Woo — Shadow Monarch</h3>
-              <p class="product-desc">Features luminous blue eye highlights, dual daggers pose, and ominous shadow soldier backdrop.</p>
-              <div class="card-footer">
-                <div class="price-container">
-                  <span class="price-label">Special Price</span>
-                  <span class="price-value">₹2,199</span>
-                </div>
-                <button class="btn btn-sm open-order-btn" data-product="Sung Jin-Woo Shadow Monarch" data-price="₹2,199">Order Now ↗</button>
-              </div>
-            </div>
-          </article>
-
+          <!-- Dynamically populated by JavaScript catalog engine -->
         </div>
       </div>
     </section>
@@ -1991,9 +2126,12 @@
         Crafted with passion for the anime community. © <span id="currentYear"></span> AnimeAdda. All rights reserved.
       </div>
 
-      <div style="display: flex; gap: 15px;">
+      <div style="display: flex; align-items: center; gap: 18px;">
         <a href="https://www.instagram.com/animeadda_8/" target="_blank" rel="noopener" style="color: var(--text-sub); text-decoration: none;">Instagram</a>
         <a href="https://chat.whatsapp.com/KJNNX7iJyEk5iuxqvFflTC" target="_blank" rel="noopener" style="color: var(--text-sub); text-decoration: none;">WhatsApp</a>
+        <button id="ownerLoginBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.82rem; display: flex; align-items: center; gap: 4px;">
+          ⚙️ <span>Owner Portal</span>
+        </button>
       </div>
     </div>
   </footer>
@@ -2013,7 +2151,7 @@
 
   <!-- INTERACTIVE ORDER / PRE-BOOK MODAL -->
   <div class="modal-backdrop" id="orderModal">
-    <div class="order-modal">
+    <div class="custom-modal">
       <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
       
       <div class="modal-header">
@@ -2052,16 +2190,801 @@
     </div>
   </div>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- OWNER PIN LOGIN MODAL -->
+  <div class="modal-backdrop" id="ownerPinModal">
+    <div class="custom-modal" style="width: min(380px, 100%); text-align: center;">
+      <button class="modal-close-btn" id="pinModalCloseBtn">✕</button>
+      <div style="font-size: 2.5rem; margin-bottom: 12px;">👑</div>
+      <h3 style="font-size: 1.4rem; margin-bottom: 8px;">Owner Authentication</h3>
+      <p style="color: var(--text-sub); font-size: 0.88rem; margin-bottom: 22px;">Enter your 4-digit PIN to manage products and stock.</p>
+      
+      <form id="ownerPinForm">
+        <div class="form-group">
+          <input type="password" id="ownerPinInput" class="form-input" placeholder="Enter PIN (Default: 8888)" maxlength="8" style="text-align: center; font-size: 1.4rem; letter-spacing: 4px;" required autocomplete="off">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">
+          <span>Unlock Dashboard 🔓</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- OWNER ADD / EDIT PRODUCT MODAL -->
+  <div class="modal-backdrop" id="productFormModal">
+    <div class="custom-modal" style="width: min(560px, 100%);">
+      <button class="modal-close-btn" id="productFormCloseBtn">✕</button>
+      
+      <h3 id="formModalTitle" style="font-size: 1.45rem; margin-bottom: 20px;">➕ Add New Figure</h3>
+
+      <form id="productManageForm">
+        <input type="hidden" id="editProductId" value="">
+
+        <div class="form-group">
+          <label class="form-label" for="prodTitle">Figure Name *</label>
+          <input type="text" id="prodTitle" class="form-input" placeholder="e.g. Roronoa Zoro — Enma Sword" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="prodAnime">Anime Series *</label>
+            <input type="text" id="prodAnime" class="form-input" placeholder="e.g. One Piece, Naruto" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodPrice">Price *</label>
+            <input type="text" id="prodPrice" class="form-input" placeholder="e.g. ₹1,999 or Ask for price" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="prodStatus">Status / Badge *</label>
+            <select id="prodStatus" class="form-select">
+              <option value="stock">🟢 In Stock</option>
+              <option value="prebooking">⏳ Pre-Booking</option>
+              <option value="premium">👑 Premium Resin Scale</option>
+              <option value="gear">⚔️ Accessories & Swords</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="prodRating">Rating (1.0 to 5.0)</label>
+            <input type="number" step="0.1" min="1" max="5" id="prodRating" class="form-input" value="5.0">
+          </div>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-group">
+          <label class="form-label">Product Visual (Photo or Emoji)</label>
+          
+          <div class="upload-zone" id="uploadZone">
+            <div style="font-size: 1.8rem;">📁</div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.92rem;">Choose Photo From Phone / PC</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);">Supports JPG, PNG, WebP (Auto-compressed)</div>
+            <input type="file" id="prodImageFile" accept="image/*" style="display: none;">
+          </div>
+
+          <div class="photo-preview-wrap" id="photoPreviewWrap">
+            <img id="photoPreviewImg" src="" alt="Product Preview">
+            <button type="button" class="clear-photo-btn" id="clearPhotoBtn" title="Remove photo">✕</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+            <div style="flex: 1;">
+              <input type="text" id="prodImageUrl" class="form-input" placeholder="Or paste image link (URL)...">
+            </div>
+            <div style="width: 100px;">
+              <input type="text" id="prodEmoji" class="form-input" placeholder="Emoji ⚔️" style="text-align: center;">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="prodDesc">Short Description</label>
+          <textarea id="prodDesc" class="form-textarea" rows="2" placeholder="e.g. High-detail sculpt, dynamic base with original box."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 22px;">
+          <button type="submit" class="btn" style="flex: 1;">
+            <span id="saveBtnText">Save Product</span>
+          </button>
+          <button type="button" class="btn btn-secondary" id="cancelFormBtn">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer"></div>
+
+  <!-- SCRIPT LOGIC & PRODUCT ENGINE -->
   <script>
-    // Update year
+    // Update year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     const INSTAGRAM_URL = "https://www.instagram.com/animeadda_8/";
     const WHATSAPP_COMMUNITY = "https://chat.whatsapp.com/KJNNX7iJyEk5iuxqvFflTC";
 
     // ==========================================
-    // 1. CANVAS PARTICLE SYSTEM (60FPS GLOWING MOTES)
+    // 1. DEFAULT CATALOG DATA
+    // ==========================================
+    const DEFAULT_CATALOG = [
+      {
+        id: "prod_1",
+        title: "Monkey D. Luffy — Gear 5 Sun God",
+        anime: "One Piece",
+        category: "one-piece",
+        status: "stock",
+        price: "₹1,899",
+        rating: "4.9",
+        desc: "High-detail sculpted sun god transformation with dynamic cloud aura base and vibrant colors.",
+        emoji: "🏴‍☠️",
+        image: ""
+      },
+      {
+        id: "prod_2",
+        title: "Naruto Uzumaki — Sage Mode",
+        anime: "Naruto Shippuden",
+        category: "naruto",
+        status: "stock",
+        price: "₹1,699",
+        rating: "4.8",
+        desc: "Iconic toad scroll pose featuring signature orange pigment eyes and detailed Akatsuki battle mantle.",
+        emoji: "🍥",
+        image: ""
+      },
+      {
+        id: "prod_3",
+        title: "Goku — Mastered Ultra Instinct",
+        anime: "Dragon Ball Super",
+        category: "dragon-ball",
+        status: "prebooking",
+        price: "₹2,499",
+        rating: "5.0",
+        desc: "Silver hair divine aura collectible. Limited import slots for the upcoming batch.",
+        emoji: "🐉",
+        image: ""
+      },
+      {
+        id: "prod_4",
+        title: "Gojo Satoru — Hollow Purple",
+        anime: "Jujutsu Kaisen",
+        category: "jujutsu-kaisen",
+        status: "premium",
+        price: "₹3,999",
+        rating: "5.0",
+        desc: "Deluxe scale edition with translucent purple energy effects and custom illuminated display plinth.",
+        emoji: "👁️",
+        image: ""
+      },
+      {
+        id: "prod_5",
+        title: "Kyojuro Rengoku — Nichirin Sword",
+        anime: "Demon Slayer",
+        category: "demon-slayer",
+        status: "gear",
+        price: "₹1,299",
+        rating: "4.9",
+        desc: "High-precision replica metal blade with authentic flame tsuba guard, wooden saya sheath and stand.",
+        emoji: "⚔️",
+        image: ""
+      },
+      {
+        id: "prod_6",
+        title: "Sung Jin-Woo — Shadow Monarch",
+        anime: "Solo Leveling",
+        category: "solo-leveling",
+        status: "stock",
+        price: "₹2,199",
+        rating: "5.0",
+        desc: "Features luminous blue eye highlights, dual daggers pose, and ominous shadow soldier backdrop.",
+        emoji: "🗡️",
+        image: ""
+      }
+    ];
+
+    // Load active catalog from LocalStorage or Fallback
+    let catalog = [];
+    try {
+      const saved = localStorage.getItem('animeadda_catalog');
+      catalog = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_CATALOG));
+    } catch(e) {
+      catalog = JSON.parse(JSON.stringify(DEFAULT_CATALOG));
+    }
+
+    function saveCatalogLocally() {
+      localStorage.setItem('animeadda_catalog', JSON.stringify(catalog));
+    }
+
+    // Toast Alert Helper
+    function showToast(msg, icon = '✨') {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>${icon}</span> <span>${msg}</span>`;
+      document.getElementById('toastContainer').appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        toast.style.transition = '0.4s';
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    // ==========================================
+    // 2. OWNER AUTHENTICATION & PIN MANAGEMENT
+    // ==========================================
+    let isOwnerLoggedIn = false;
+    let ownerPin = localStorage.getItem('animeadda_owner_pin') || '8888';
+
+    const ownerTopBar = document.getElementById('ownerTopBar');
+    const ownerPinModal = document.getElementById('ownerPinModal');
+    const ownerPinForm = document.getElementById('ownerPinForm');
+    const ownerPinInput = document.getElementById('ownerPinInput');
+    const pinModalCloseBtn = document.getElementById('pinModalCloseBtn');
+    const ownerLoginBtn = document.getElementById('ownerLoginBtn');
+    const logoutOwnerBtn = document.getElementById('logoutOwnerBtn');
+    const changePinBtn = document.getElementById('changePinBtn');
+
+    function checkOwnerSession() {
+      if (sessionStorage.getItem('animeadda_owner_session') === 'true') {
+        enableOwnerMode(false);
+      }
+    }
+
+    function enableOwnerMode(notify = true) {
+      isOwnerLoggedIn = true;
+      document.body.classList.add('owner-mode-active');
+      ownerTopBar.classList.add('active');
+      sessionStorage.setItem('animeadda_owner_session', 'true');
+      renderCatalog();
+      if (notify) showToast('Owner Mode Activated! You can now add, edit, or delete figures.', '👑');
+    }
+
+    function disableOwnerMode() {
+      isOwnerLoggedIn = false;
+      document.body.classList.remove('owner-mode-active');
+      ownerTopBar.classList.remove('active');
+      sessionStorage.removeItem('animeadda_owner_session');
+      renderCatalog();
+      showToast('Owner Mode Logged Out', '🔒');
+    }
+
+    ownerLoginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (isOwnerLoggedIn) {
+        showToast('You are already in Owner Mode', '👑');
+      } else {
+        ownerPinInput.value = '';
+        ownerPinModal.classList.add('open');
+        ownerPinInput.focus();
+      }
+    });
+
+    pinModalCloseBtn.addEventListener('click', () => ownerPinModal.classList.remove('open'));
+    ownerPinModal.addEventListener('click', (e) => {
+      if (e.target === ownerPinModal) ownerPinModal.classList.remove('open');
+    });
+
+    ownerPinForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const enteredPin = ownerPinInput.value.trim();
+      if (enteredPin === ownerPin) {
+        ownerPinModal.classList.remove('open');
+        enableOwnerMode(true);
+      } else {
+        showToast('Incorrect PIN! Try again.', '❌');
+        ownerPinInput.value = '';
+      }
+    });
+
+    logoutOwnerBtn.addEventListener('click', disableOwnerMode);
+
+    changePinBtn.addEventListener('click', () => {
+      const newPin = prompt('Enter a new 4-8 digit PIN for Owner Portal:', ownerPin);
+      if (newPin && newPin.trim().length >= 4) {
+        ownerPin = newPin.trim();
+        localStorage.setItem('animeadda_owner_pin', ownerPin);
+        showToast('Owner PIN updated successfully!', '🔑');
+      }
+    });
+
+    // Secret: Click logo 3 times to open Owner Login
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+    document.getElementById('brandLogo').addEventListener('click', () => {
+      logoClickCount++;
+      clearTimeout(logoClickTimer);
+      if (logoClickCount >= 3) {
+        logoClickCount = 0;
+        ownerLoginBtn.click();
+      } else {
+        logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 800);
+      }
+    });
+
+    // Check hash for #admin or #owner
+    if (window.location.hash === '#admin' || window.location.hash === '#owner') {
+      setTimeout(() => ownerLoginBtn.click(), 500);
+    }
+
+    // ==========================================
+    // 3. CATALOG RENDERING ENGINE
+    // ==========================================
+    const productGrid = document.getElementById('productGrid');
+    const productCounter = document.getElementById('productCounter');
+    const searchInput = document.getElementById('searchInput');
+    let currentFilter = 'all';
+
+    function getBadgeHtml(status) {
+      switch(status) {
+        case 'stock': return '<span class="status-badge badge-stock" title="Click to change status">IN STOCK</span>';
+        case 'prebooking': return '<span class="status-badge badge-prebooking" title="Click to change status">PRE-BOOKING</span>';
+        case 'premium': return '<span class="status-badge badge-premium" title="Click to change status">PREMIUM RESIN</span>';
+        case 'gear': return '<span class="status-badge badge-gear" title="Click to change status">ACCESSORIES</span>';
+        default: return '<span class="status-badge badge-stock">IN STOCK</span>';
+      }
+    }
+
+    function renderCatalog() {
+      productGrid.innerHTML = '';
+      const query = (searchInput.value || '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      catalog.forEach((item, index) => {
+        const title = (item.title || '').toLowerCase();
+        const anime = (item.anime || '').toLowerCase();
+        const status = (item.status || 'stock').toLowerCase();
+        const category = (item.category || anime).toLowerCase();
+
+        const matchesFilter = (currentFilter === 'all') || 
+                              (currentFilter === status) || 
+                              (currentFilter === category);
+        const matchesQuery = query === '' || title.includes(query) || anime.includes(query);
+
+        if (!matchesFilter || !matchesQuery) return;
+
+        visibleCount++;
+
+        const card = document.createElement('article');
+        card.className = 'product-card tilt-card reveal is-revealed';
+        card.dataset.id = item.id;
+        card.dataset.status = item.status;
+        card.dataset.category = item.category || 'anime';
+        card.dataset.name = item.title;
+        card.dataset.price = item.price;
+
+        const visualHtml = item.image 
+          ? `<img src="${item.image}" class="card-img-visual" alt="${item.title}">` 
+          : `<div class="card-emoji-visual">${item.emoji || '⚔️'}</div>`;
+
+        card.innerHTML = `
+          <div class="card-owner-bar">
+            <button class="card-owner-btn edit-btn" title="Edit this figure" onclick="openEditModal('${item.id}')">✏️ Edit</button>
+            <button class="card-owner-btn delete-btn" title="Remove this figure" onclick="deleteProduct('${item.id}')">🗑️ Delete</button>
+          </div>
+          <div class="card-glare"></div>
+          <div class="card-preview">
+            <div class="card-preview-mesh"></div>
+            <div onclick="cycleProductStatus('${item.id}', event)">
+              ${getBadgeHtml(item.status)}
+            </div>
+            <span class="rating-badge">★ ${item.rating || '5.0'}</span>
+            ${visualHtml}
+          </div>
+          <div class="card-info">
+            <div class="anime-tag">${item.anime || 'Anime Collectible'}</div>
+            <h3 class="product-title">${item.title}</h3>
+            <p class="product-desc">${item.desc || 'Authentic collector figure from AnimeAdda.'}</p>
+            <div class="card-footer">
+              <div class="price-container">
+                <span class="price-label">${item.status === 'prebooking' ? 'Estimated' : 'Price'}</span>
+                <span class="price-value">${item.price}</span>
+              </div>
+              <button class="btn btn-sm open-order-btn" data-product="${item.title}" data-price="${item.price}">
+                ${item.status === 'prebooking' ? 'Pre-Book ⏳' : 'Order Now ↗'}
+              </button>
+            </div>
+          </div>
+        `;
+
+        productGrid.appendChild(card);
+      });
+
+      productCounter.textContent = `Showing ${visibleCount} collectible${visibleCount === 1 ? '' : 's'}`;
+      attachCardInteractions();
+    }
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderCatalog();
+      });
+    });
+
+    searchInput.addEventListener('input', renderCatalog);
+
+    function filterByFandom(fandom) {
+      currentFilter = fandom;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('#shop').scrollIntoView({ behavior: 'smooth' });
+      renderCatalog();
+    }
+
+    // Cycle product status directly by clicking badge in Owner Mode
+    window.cycleProductStatus = function(id, e) {
+      if (!isOwnerLoggedIn) return;
+      e.stopPropagation();
+      const item = catalog.find(p => p.id === id);
+      if (!item) return;
+
+      const statuses = ['stock', 'prebooking', 'premium', 'gear'];
+      let nextIndex = (statuses.indexOf(item.status) + 1) % statuses.length;
+      item.status = statuses[nextIndex];
+      saveCatalogLocally();
+      renderCatalog();
+      showToast(`Status updated to: ${item.status.toUpperCase()}`, '🔄');
+    };
+
+    // ==========================================
+    // 4. ADD / EDIT PRODUCT MODAL LOGIC
+    // ==========================================
+    const productFormModal = document.getElementById('productFormModal');
+    const productFormCloseBtn = document.getElementById('productFormCloseBtn');
+    const cancelFormBtn = document.getElementById('cancelFormBtn');
+    const productManageForm = document.getElementById('productManageForm');
+    const formModalTitle = document.getElementById('formModalTitle');
+    const saveBtnText = document.getElementById('saveBtnText');
+    const addNewProductBtn = document.getElementById('addNewProductBtn');
+
+    const editProductId = document.getElementById('editProductId');
+    const prodTitle = document.getElementById('prodTitle');
+    const prodAnime = document.getElementById('prodAnime');
+    const prodPrice = document.getElementById('prodPrice');
+    const prodStatus = document.getElementById('prodStatus');
+    const prodRating = document.getElementById('prodRating');
+    const prodDesc = document.getElementById('prodDesc');
+    const prodEmoji = document.getElementById('prodEmoji');
+    const prodImageUrl = document.getElementById('prodImageUrl');
+    const prodImageFile = document.getElementById('prodImageFile');
+    const uploadZone = document.getElementById('uploadZone');
+    const photoPreviewWrap = document.getElementById('photoPreviewWrap');
+    const photoPreviewImg = document.getElementById('photoPreviewImg');
+    const clearPhotoBtn = document.getElementById('clearPhotoBtn');
+
+    let currentBase64Image = '';
+
+    // Trigger file picker
+    uploadZone.addEventListener('click', () => prodImageFile.click());
+
+    // File selected -> compress to web-ready JPEG and preview
+    prodImageFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          // Compress via Canvas to max width 650px
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 650;
+
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          currentBase64Image = canvas.toDataURL('image/jpeg', 0.85);
+          photoPreviewImg.src = currentBase64Image;
+          photoPreviewWrap.style.display = 'block';
+          uploadZone.style.display = 'none';
+          prodImageUrl.value = '';
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    clearPhotoBtn.addEventListener('click', () => {
+      currentBase64Image = '';
+      prodImageFile.value = '';
+      photoPreviewWrap.style.display = 'none';
+      uploadZone.style.display = 'flex';
+    });
+
+    prodImageUrl.addEventListener('input', () => {
+      if (prodImageUrl.value.trim()) {
+        currentBase64Image = '';
+        prodImageFile.value = '';
+        photoPreviewWrap.style.display = 'none';
+        uploadZone.style.display = 'flex';
+      }
+    });
+
+    function openAddModal() {
+      productManageForm.reset();
+      editProductId.value = '';
+      currentBase64Image = '';
+      photoPreviewWrap.style.display = 'none';
+      uploadZone.style.display = 'flex';
+      formModalTitle.textContent = '➕ Add New Figure';
+      saveBtnText.textContent = 'Add Figure to Catalog';
+      productFormModal.classList.add('open');
+    }
+
+    addNewProductBtn.addEventListener('click', openAddModal);
+
+    window.openEditModal = function(id) {
+      const item = catalog.find(p => p.id === id);
+      if (!item) return;
+
+      editProductId.value = item.id;
+      prodTitle.value = item.title;
+      prodAnime.value = item.anime;
+      prodPrice.value = item.price;
+      prodStatus.value = item.status;
+      prodRating.value = item.rating || '5.0';
+      prodDesc.value = item.desc || '';
+      prodEmoji.value = item.emoji || '';
+      prodImageUrl.value = (!item.image.startsWith('data:')) ? item.image : '';
+
+      if (item.image && item.image.startsWith('data:')) {
+        currentBase64Image = item.image;
+        photoPreviewImg.src = item.image;
+        photoPreviewWrap.style.display = 'block';
+        uploadZone.style.display = 'none';
+      } else {
+        currentBase64Image = '';
+        photoPreviewWrap.style.display = 'none';
+        uploadZone.style.display = 'flex';
+      }
+
+      formModalTitle.textContent = '✏️ Edit Figure';
+      saveBtnText.textContent = 'Save Changes';
+      productFormModal.classList.add('open');
+    };
+
+    window.deleteProduct = function(id) {
+      const item = catalog.find(p => p.id === id);
+      if (!item) return;
+
+      if (confirm(`Are you sure you want to remove "${item.title}" from the store?`)) {
+        catalog = catalog.filter(p => p.id !== id);
+        saveCatalogLocally();
+        renderCatalog();
+        showToast(`Removed "${item.title}"`, '🗑️');
+      }
+    };
+
+    productManageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const finalImage = currentBase64Image || prodImageUrl.value.trim() || '';
+      const finalEmoji = prodEmoji.value.trim() || (finalImage ? '' : '⚔️');
+
+      const figureData = {
+        title: prodTitle.value.trim(),
+        anime: prodAnime.value.trim(),
+        category: prodAnime.value.trim().toLowerCase().replace(/\s+/g, '-'),
+        price: prodPrice.value.trim(),
+        status: prodStatus.value,
+        rating: prodRating.value || '5.0',
+        desc: prodDesc.value.trim(),
+        emoji: finalEmoji,
+        image: finalImage
+      };
+
+      const existingId = editProductId.value;
+      if (existingId) {
+        // Update existing
+        const idx = catalog.findIndex(p => p.id === existingId);
+        if (idx !== -1) {
+          catalog[idx] = { ...catalog[idx], ...figureData };
+          showToast(`Updated "${figureData.title}"!`, '✅');
+        }
+      } else {
+        // Add new
+        figureData.id = 'prod_' + Date.now();
+        catalog.unshift(figureData);
+        showToast(`Added "${figureData.title}" to catalog!`, '🎉');
+      }
+
+      saveCatalogLocally();
+      renderCatalog();
+      productFormModal.classList.remove('open');
+    });
+
+    productFormCloseBtn.addEventListener('click', () => productFormModal.classList.remove('open'));
+    cancelFormBtn.addEventListener('click', () => productFormModal.classList.remove('open'));
+    productFormModal.addEventListener('click', (e) => {
+      if (e.target === productFormModal) productFormModal.classList.remove('open');
+    });
+
+    // ==========================================
+    // 5. PUBLISH LIVE TO GITHUB PAGES
+    // ==========================================
+    const publishToGitHubBtn = document.getElementById('publishToGitHubBtn');
+    const GITHUB_REPO = "parekhharsh08/AnimeAdda-Website";
+
+    publishToGitHubBtn.addEventListener('click', async () => {
+      let token = localStorage.getItem('animeadda_gh_token') || '';
+      if (!token) {
+        token = prompt("Enter your GitHub Personal Access Token (PAT) to enable 1-click publishing.\n(It is saved securely only in your browser's localStorage):");
+        if (!token || !token.trim()) {
+          showToast("Publish cancelled: No token provided.", "⚠️");
+          return;
+        }
+        token = token.trim();
+        localStorage.setItem('animeadda_gh_token', token);
+      }
+
+      if (!confirm("🚀 Publish your current catalog to the live website on GitHub Pages?\n\nThis will push all your added/edited figures to your repository so every visitor sees them.")) {
+        return;
+      }
+
+      publishToGitHubBtn.disabled = true;
+      publishToGitHubBtn.innerHTML = '<span>⏳ Publishing to GitHub...</span>';
+
+      try {
+        // 1. Fetch current index.html from GitHub repo
+        const getUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/index.html`;
+        const res = await fetch(getUrl, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (!res.ok) {
+          if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('animeadda_gh_token');
+            throw new Error("GitHub token invalid or expired. Please try again with a valid token.");
+          }
+          throw new Error("Could not fetch repository file from GitHub.");
+        }
+        const data = await res.json();
+        const currentSha = data.sha;
+        const currentContent = decodeURIComponent(escape(atob(data.content)));
+
+        // 2. Replace the DEFAULT_CATALOG array in the file with active catalog
+        const catalogRegex = /const DEFAULT_CATALOG = \[[\s\S]*?\];/;
+        const newCatalogCode = `const DEFAULT_CATALOG = ${JSON.stringify(catalog, null, 2)};`;
+
+        let updatedContent = currentContent;
+        if (catalogRegex.test(currentContent)) {
+          updatedContent = currentContent.replace(catalogRegex, newCatalogCode);
+        } else {
+          throw new Error("Catalog marker not found in index.html");
+        }
+
+        // 3. Commit back to GitHub
+        const utf8Bytes = unescape(encodeURIComponent(updatedContent));
+        const base64Content = btoa(utf8Bytes);
+
+        const putRes = await fetch(getUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: `Update product catalog (${catalog.length} figures) via Owner Dashboard`,
+            content: base64Content,
+            sha: currentSha,
+            branch: 'main'
+          })
+        });
+
+        if (!putRes.ok) {
+          const errData = await putRes.json();
+          throw new Error(errData.message || "Failed to commit changes to GitHub.");
+        }
+
+        showToast("✅ Successfully published to GitHub! Live site updates in 1-2 mins.", "🚀");
+        alert("🎉 Success! Your changes have been pushed to GitHub.\n\nGitHub Pages is automatically updating your live website at:\nhttps://parekhharsh08.github.io/AnimeAdda-Website/\n(It takes about 1 minute to reflect online)");
+      } catch (err) {
+        console.error(err);
+        showToast("Publish failed: " + err.message, "❌");
+        alert("Could not sync directly with GitHub API: " + err.message + "\n\nDon't worry! Your changes are saved locally in your browser.");
+      } finally {
+        publishToGitHubBtn.disabled = false;
+        publishToGitHubBtn.innerHTML = '<span>🚀 Publish to Live Site</span>';
+      }
+    });
+
+    // ==========================================
+    // 6. 3D CARD TILT & GLARE SYSTEM
+    // ==========================================
+    function attachCardInteractions() {
+      const tiltCards = document.querySelectorAll('.tilt-card');
+      tiltCards.forEach(card => {
+        const glare = card.querySelector('.card-glare');
+        
+        card.onmousemove = (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -10;
+          const rotateY = ((x - centerX) / centerX) * 10;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+
+          if (glare) {
+            glare.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(255, 255, 255, 0.22), transparent 60%)`;
+          }
+        };
+
+        card.onmouseleave = () => {
+          card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        };
+      });
+
+      // Attach Order Modal openers
+      document.querySelectorAll('.open-order-btn').forEach(btn => {
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          const productName = btn.dataset.product || 'Anime Figure';
+          const productPrice = btn.dataset.price || 'Ask for price';
+
+          document.getElementById('modalProductTitle').textContent = productName;
+          document.getElementById('modalPriceLabel').textContent = `Price: ${productPrice}`;
+
+          document.getElementById('modalWhatsAppBtn').href = WHATSAPP_COMMUNITY;
+          document.getElementById('modalInstagramBtn').href = INSTAGRAM_URL;
+
+          document.getElementById('orderModal').classList.add('open');
+        };
+      });
+    }
+
+    // Hero 3D Tilt
+    const tiltHeroCard = document.getElementById('tiltHeroCard');
+    if (tiltHeroCard) {
+      tiltHeroCard.onmousemove = (e) => {
+        const rect = tiltHeroCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+
+        tiltHeroCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      };
+
+      tiltHeroCard.onmouseleave = () => {
+        tiltHeroCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      };
+    }
+
+    // Order Modal Close
+    const orderModal = document.getElementById('orderModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    modalCloseBtn.addEventListener('click', () => orderModal.classList.remove('open'));
+    orderModal.addEventListener('click', (e) => {
+      if (e.target === orderModal) orderModal.classList.remove('open');
+    });
+
+    // ==========================================
+    // 7. CANVAS PARTICLE SYSTEM (60FPS GLOWING MOTES)
     // ==========================================
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
@@ -2095,7 +3018,6 @@
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
 
-        // Interaction with mouse
         if (mouse.x !== null) {
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
@@ -2145,120 +3067,7 @@
     });
 
     // ==========================================
-    // 2. 3D CARD TILT WITH DYNAMIC GLARE EFFECT
-    // ==========================================
-    const tiltCards = document.querySelectorAll('.tilt-card, #tiltHeroCard');
-    tiltCards.forEach(card => {
-      const glare = card.querySelector('.card-glare');
-      
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
-
-        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
-
-        if (glare) {
-          glare.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(255, 255, 255, 0.22), transparent 60%)`;
-        }
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-      });
-    });
-
-    // ==========================================
-    // 3. SEARCH & CATEGORY FILTERING SYSTEM
-    // ==========================================
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const searchInput = document.getElementById('searchInput');
-    const productCards = document.querySelectorAll('.product-card');
-    const productCounter = document.getElementById('productCounter');
-    let currentFilter = 'all';
-
-    function updateCatalogDisplay() {
-      const query = searchInput.value.toLowerCase().trim();
-      let visibleCount = 0;
-
-      productCards.forEach(card => {
-        const title = (card.dataset.name || '').toLowerCase();
-        const category = (card.dataset.category || '').toLowerCase();
-        const status = (card.dataset.status || '').toLowerCase();
-
-        const matchesFilter = (currentFilter === 'all') || 
-                              (currentFilter === status) || 
-                              (currentFilter === category);
-        const matchesQuery = query === '' || title.includes(query) || category.includes(query);
-
-        if (matchesFilter && matchesQuery) {
-          card.style.display = '';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      productCounter.textContent = `Showing ${visibleCount} collectible${visibleCount === 1 ? '' : 's'}`;
-    }
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        updateCatalogDisplay();
-      });
-    });
-
-    searchInput.addEventListener('input', updateCatalogDisplay);
-
-    function filterByFandom(fandom) {
-      currentFilter = fandom;
-      filterButtons.forEach(b => b.classList.remove('active'));
-      document.querySelector('#shop').scrollIntoView({ behavior: 'smooth' });
-      updateCatalogDisplay();
-    }
-
-    // ==========================================
-    // 4. ORDER / PRE-BOOK MODAL
-    // ==========================================
-    const orderModal = document.getElementById('orderModal');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    const modalProductTitle = document.getElementById('modalProductTitle');
-    const modalPriceLabel = document.getElementById('modalPriceLabel');
-    const modalWhatsAppBtn = document.getElementById('modalWhatsAppBtn');
-    const modalInstagramBtn = document.getElementById('modalInstagramBtn');
-
-    document.querySelectorAll('.open-order-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const productName = btn.dataset.product || 'Anime Figure';
-        const productPrice = btn.dataset.price || 'Ask for price';
-
-        modalProductTitle.textContent = productName;
-        modalPriceLabel.textContent = `Price: ${productPrice}`;
-
-        // WhatsApp direct community
-        modalWhatsAppBtn.href = WHATSAPP_COMMUNITY;
-        modalInstagramBtn.href = INSTAGRAM_URL;
-
-        orderModal.classList.add('open');
-      });
-    });
-
-    modalCloseBtn.addEventListener('click', () => orderModal.classList.remove('open'));
-    orderModal.addEventListener('click', (e) => {
-      if (e.target === orderModal) orderModal.classList.remove('open');
-    });
-
-    // ==========================================
-    // 5. NAVBAR SCROLL EFFECT & BACK TO TOP
+    // 8. NAVBAR SCROLL EFFECT & BACK TO TOP
     // ==========================================
     const navbar = document.getElementById('navbar');
     const backToTopBtn = document.getElementById('backToTopBtn');
@@ -2282,7 +3091,7 @@
     });
 
     // ==========================================
-    // 6. SCROLL REVEAL OBSERVER WITH FALLBACK
+    // 9. SCROLL REVEAL OBSERVER WITH FALLBACK
     // ==========================================
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2298,17 +3107,19 @@
 
     document.querySelectorAll('.reveal').forEach(el => {
       revealObserver.observe(el);
-      // Fallback: Check if already in viewport
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight + 100) {
         el.classList.add('is-revealed');
       }
     });
 
-    // Final safety fallback: reveal all after 1.5s in case of slow mobile scroll
     setTimeout(() => {
       document.querySelectorAll('.reveal:not(.is-revealed)').forEach(el => el.classList.add('is-revealed'));
     }, 1500);
+
+    // Initial render and session check
+    renderCatalog();
+    checkOwnerSession();
   </script>
 </body>
 </html>
